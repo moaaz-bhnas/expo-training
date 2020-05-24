@@ -16,7 +16,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'coral',
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginBottom: 20
   },
   title: {
     fontSize: 20,
