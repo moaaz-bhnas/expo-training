@@ -4,11 +4,6 @@ import { StyleSheet, View, TextInput, Button } from 'react-native';
 const AddForm = ({ addTodo }) => {
   const [ todo, setTodo ] = useState('');
 
-  const handleSubmit = useCallback(() => {
-    addTodo(todo);
-    setTodo('');
-  }, [ todo ])
-
   return (
     <View>
       <TextInput 
@@ -20,7 +15,7 @@ const AddForm = ({ addTodo }) => {
       <Button 
         title="Add Todo" 
         color="coral"
-        onPress={handleSubmit}
+        onPress={() => addTodo(todo, setTodo)}
       />
     </View>
   );

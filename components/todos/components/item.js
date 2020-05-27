@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
 
 const Item = ({ item, removeTodo }) => {
   return (
@@ -8,6 +9,7 @@ const Item = ({ item, removeTodo }) => {
       onPress={() => removeTodo(item.id)}
     >
       <Text>{item.text}</Text>
+      <MaterialIcons name="delete" size={24} color="#E65A55" />
     </TouchableOpacity>
   );
 }
@@ -20,7 +22,9 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
     marginBottom: 10,
-    borderRadius: 10
+    borderRadius: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between'
   }
 });
 

@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { StyleSheet, View, FlatList, Text } from 'react-native';
+import { StyleSheet, View, FlatList, Text, Alert, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import Header from './components/header';
 import Todos from './components/todos';
 import AddForm from './components/addForm';
@@ -18,31 +18,45 @@ export default function App() {
     ));
   }, [])
 
-  const addTodo = useCallback((text) => {
+  const addTodo = useCallback((text, setText) => {
+    if (text.length <= 3) {
+      Alert.alert('OOPS!', 'Todo must be longer than 3 characters', [
+        { text: 'Understood', onPress: () => console.log('closed') }
+      ]);
+      return;
+    }
+
     setTodos(prevTodos => {
       return ([
         { id: Math.random().toString(), text },
         ...prevTodos
       ]);
     });
+    setText('');
   }, []);
 
   return (
-    <View>
-      <Header />
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()} >
       <View style={styles.container}>
-        <AddForm addTodo={addTodo} />
-        <Todos 
-          todos={todos} 
-          removeTodo={removeTodo}
-        />
+        <Header />
+        <View style={styles.main}>
+          <AddForm addTodo={addTodo} />
+          <Todos 
+            todos={todos} 
+            removeTodo={removeTodo}
+          />
+        </View>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 10
+    flex: 1
+  },
+  main: {
+    paddingHorizontal: 10,
+    flex: 1
   }
 });
